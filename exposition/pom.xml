@@ -19,7 +19,17 @@
     <dependencies>
         <dependency>
             <groupId>com.stefan</groupId>
+            <artifactId>domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.stefan</groupId>
             <artifactId>infrastructure</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.stefan</groupId>
+            <artifactId>application</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
