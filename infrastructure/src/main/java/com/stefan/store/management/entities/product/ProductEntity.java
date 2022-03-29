@@ -17,11 +17,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "product")
+@Table(name = "products")
 public class ProductEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idProduct;
 
     @Column(nullable = false)
@@ -32,6 +32,7 @@ public class ProductEntity {
     private int stock;
 
     @Builder.Default
+    @Column(columnDefinition = "timestamp default CURRENT_TIMESTAMP")
     private LocalDateTime expirationDate = LocalDateTime.now().plusDays(30);
 
     @ManyToOne(fetch=FetchType.LAZY)

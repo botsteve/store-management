@@ -3,6 +3,7 @@ package com.stefan.store.management.controller.user;
 import com.stefan.store.management.dto.user.UserDto;
 import com.stefan.store.management.services.user.UserFacade;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,18 +19,18 @@ public class UserController {
 
     private final UserFacade userFacade;
 
-    @GetMapping("/{username}")
-    public UserDto getUser(String username){
+    @GetMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserDto getUser(@PathVariable String username) {
         return fromDomain(userFacade.getUser(username));
     }
 
-    @PostMapping
-    public UserDto createUser(@RequestBody UserDto userDto){
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserDto createUser(@RequestBody UserDto userDto) {
         return fromDomain(userFacade.createUser(toDomain(userDto)));
     }
 
-    @GetMapping
-    public List<UserDto> getAllUsers(){
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<UserDto> getAllUsers() {
         return userFacade.getAllUsers().stream()
                 .map(UserDto::fromDomain)
                 .collect(Collectors.toList());
