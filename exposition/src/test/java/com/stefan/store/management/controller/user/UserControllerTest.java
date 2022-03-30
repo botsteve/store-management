@@ -5,9 +5,9 @@ import com.stefan.store.management.domain.entities.user.User;
 import com.stefan.store.management.services.user.UserFacade;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -24,7 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(value = UserController.class)
-@AutoConfigureMockMvc(addFilters = false)
 public class UserControllerTest extends BaseTestClass {
 
     private static final String USERNAME_USER1 = "test";
@@ -41,6 +40,7 @@ public class UserControllerTest extends BaseTestClass {
     UserFacade userFacade;
 
     @Test
+    @WithMockUser(username = "test",password = "test")
     public void shouldReturnAllUsers() throws Exception {
         when(userFacade.getAllUsers()).thenReturn(users());
         mockMvc.perform(get("/users")
@@ -53,6 +53,7 @@ public class UserControllerTest extends BaseTestClass {
     }
 
     @Test
+    @WithMockUser(username = "test",password = "test")
     public void shouldReturnASingleUser() throws Exception {
         var user = getUser(USERNAME_USER1, PASSWORD_USER1, EMAIL_USER1);
         when(userFacade.getUser(USERNAME_USER1))
@@ -66,6 +67,7 @@ public class UserControllerTest extends BaseTestClass {
     }
 
     @Test
+    @WithMockUser(username = "test",password = "test")
     public void shouldCreateASingleUser() throws Exception {
         var newUser = getUser(USERNAME_USER1, PASSWORD_USER1, EMAIL_USER1);
         when(userFacade.createUser(newUser))

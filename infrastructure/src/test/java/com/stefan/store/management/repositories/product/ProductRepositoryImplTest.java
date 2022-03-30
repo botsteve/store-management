@@ -36,15 +36,15 @@ public class ProductRepositoryImplTest {
     }
 
     @BeforeEach
-    public void setUp() throws SQLException {
-        DbTestUtil.resetAutoIncrementColumns(applicationContext, "products");
+    public void setUp() {
         var user = userJpaRepository.findByUsername(USERNAME_USER1);
         productJpaRepository.saveAll(products(user));
     }
 
     @AfterEach
-    public void cleanUp() {
+    public void cleanUp() throws SQLException {
         productJpaRepository.deleteAll();
+        DbTestUtil.resetAutoIncrementColumns(applicationContext, "products", "id_product");
     }
 
     @Test

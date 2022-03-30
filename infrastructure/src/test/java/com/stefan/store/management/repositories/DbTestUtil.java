@@ -13,18 +13,16 @@ public final class DbTestUtil {
     private DbTestUtil() {}
 
     public static void resetAutoIncrementColumns(ApplicationContext applicationContext,
-                                                 String... tableNames) throws SQLException {
+                                                 String tableName, String columnId) throws SQLException {
         DataSource dataSource = applicationContext.getBean(DataSource.class);
         String resetSqlTemplate = getResetSqlTemplate(applicationContext);
         try (Connection dbConnection = dataSource.getConnection()) {
             //Create SQL statements that reset the auto increment columns and invoke
             //the created SQL statements.
-            for (String resetSqlArgument: tableNames) {
                 try (Statement statement = dbConnection.createStatement()) {
-                    String resetSql = String.format(resetSqlTemplate, resetSqlArgument);
+                    String resetSql = String.format(resetSqlTemplate, tableName, columnId);
                     statement.execute(resetSql);
                 }
-            }
         }
     }
 

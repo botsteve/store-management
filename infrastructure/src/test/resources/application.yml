@@ -5,4 +5,4 @@ spring:
 test:
     reset:
         sql:
-            template: ALTER TABLE %s ALTER COLUMN id_product RESTART WITH 1
+            template: ALTER TABLE %s ALTER COLUMN %s RESTART WITH 1
