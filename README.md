@@ -1,6 +1,6 @@
 # store-management
 <h1>Project architecture and use cases</h1>
-This is a multi-module maven project, that uses an inmemory H2 database to store the data. 
+This is a multi-module maven project, that uses an in-memory H2 database to store the data. 
 The database schema has 2 tables with a 1-M relationship between them.
 The Users table is also used by the Spring security to authenticate using basic auth and jdbc into the application.
 The initial user has the username: test with the password test, although the password is hashed inside the databse using bcrypt encoder.
@@ -15,3 +15,4 @@ The main modules of the application are:
 Each of these modules have tested associated with them. The application uses the default profile to run.
 In order to test the application i added the swagger dependency which provides an interface for testing the rest api. It is avaialble on
 http://localhost:8080/swagger-ui.html
+The logging, security configuration and exception handling is done through different classes in exposition module, config package.
