@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -19,7 +21,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getUser(String username) {
-        var user = userJpaRepository.findByUsername(username);
+        var user = Optional.ofNullable(userJpaRepository.findByUsername(username))
+                .orElseThrow(NoSuchElementException::new);
         return UserMapper.mapToDomain(user);
     }
 

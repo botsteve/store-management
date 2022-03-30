@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
 public class ProductRepositoryImpl implements ProductRepository {
 
 
-    private final ProductJpaRepository productRepository;
+    private final ProductJpaRepository productJpaRepository;
     private final UserJpaRepository userJpaRepository;
 
     @Override
     public Product getProduct(Long productId) {
-        var product = productRepository.findById(productId).orElseThrow(NoSuchElementException::new);
+        var product = productJpaRepository.findById(productId).orElseThrow(NoSuchElementException::new);
         return ProductMapper.mapToDomain(product);
     }
 
@@ -32,7 +32,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Transactional
     public Product createProduct(Product product) {
         var user = getUserByUsername(product.getUsername());
-        var newProduct = productRepository.save(ProductMapper.mapToEntity(product,user));
+        var newProduct = productJpaRepository.save(ProductMapper.mapToEntity(product,user));
         return ProductMapper.mapToDomain(newProduct);
     }
 
@@ -40,20 +40,20 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Transactional
     public Product modifyProduct(Product product) {
         var user = getUserByUsername(product.getUsername());
-        var modifiedProduct = productRepository.save(ProductMapper.mapToEntity(product,user));
+        var modifiedProduct = productJpaRepository.save(ProductMapper.mapToEntity(product,user));
         return ProductMapper.mapToDomain(modifiedProduct);
     }
 
     @Override
     public List<Product> findAllProductsByUsername(String username) {
-        return productRepository.findByUserUsername(username).stream()
+        return productJpaRepository.findByUserUsername(username).stream()
                 .map(ProductMapper::mapToDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Product> getAllProducts() {
-        return productRepository.findAll().stream()
+        return productJpaRepository.findAll().stream()
                 .map(ProductMapper::mapToDomain)
                 .collect(Collectors.toList());
     }

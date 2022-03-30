@@ -1,0 +1,8 @@
+spring:
+    jpa:
+        defer-datasource-initialization: true
+        show-sql: true
+test:
+    reset:
+        sql:
+            template: ALTER TABLE %s ALTER COLUMN id_product RESTART WITH 1

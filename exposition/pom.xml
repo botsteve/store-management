@@ -24,12 +24,12 @@
         </dependency>
         <dependency>
             <groupId>com.stefan</groupId>
-            <artifactId>infrastructure</artifactId>
+            <artifactId>application</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.stefan</groupId>
-            <artifactId>application</artifactId>
+            <artifactId>infrastructure</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
