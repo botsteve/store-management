@@ -63,8 +63,9 @@ public class UserRepositoryImplTest {
     public void shouldCreateNewUser() {
         var user = userRepository
                 .createUser(UserMapper.mapToDomain(user(NEW_USER_USERNAME, NEW_USER_PASSWORD, NEW_USER_EMAIL)));
+
+
         assertThat(user.getUsername()).isEqualTo(NEW_USER_USERNAME);
-        assertThat(user.getPassword()).isEqualTo(NEW_USER_PASSWORD);
         assertThat(user.getEmail()).isEqualTo(NEW_USER_EMAIL);
     }
 }

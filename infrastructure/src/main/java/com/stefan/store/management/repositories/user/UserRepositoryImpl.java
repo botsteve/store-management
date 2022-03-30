@@ -2,6 +2,10 @@ package com.stefan.store.management.repositories.user;
 
 import com.stefan.store.management.domain.entities.user.User;
 import com.stefan.store.management.domain.repositories.user.UserRepository;
+import com.stefan.store.management.entities.user.UserEntity;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -11,13 +15,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserJpaRepository userJpaRepository;
-
-    public UserRepositoryImpl(UserJpaRepository userJpaRepository) {
-        this.userJpaRepository = userJpaRepository;
-    }
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public User getUser(String username) {
@@ -29,7 +31,10 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     @Transactional
     public User createUser(User user) {
-        var newUser = userJpaRepository.save(UserMapper.mapToEntity(user));
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        UserEntity userEntity = UserMapper.mapToEntity(user.toBuilder().password(encodedPassword).build());
+
+        var newUser = userJpaRepository.save(userEntity);
         return UserMapper.mapToDomain(newUser);
     }
 
