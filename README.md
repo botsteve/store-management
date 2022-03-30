@@ -16,3 +16,5 @@ Each of these modules have tested associated with them. The application uses the
 In order to test the application i added the swagger dependency which provides an interface for testing the rest api. It is avaialble on
 http://localhost:8080/swagger-ui.html
 The logging, security configuration and exception handling is done through different classes in exposition module, config package.
+In order to create a new product we must give a valid username. Bellow is an example of a 200 OK request.
+![image](https://user-images.githubusercontent.com/32300503/160907472-68904e40-9bfc-40af-97cc-2a50fab2eb6c.png)
