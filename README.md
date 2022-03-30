@@ -13,3 +13,5 @@ The main modules of the application are:
 - exposition: Exposing the REST API and the main starting point of the application, it also depends on the other modules and builds the fat .jar.
 
 Each of these modules have tested associated with them. The application uses the default profile to run.
+In order to test the application i added the swagger dependency which provides an interface for testing the rest api. It is avaialble on
+http://localhost:8080/swagger-ui.html
