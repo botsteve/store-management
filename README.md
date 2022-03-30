@@ -3,7 +3,7 @@
 This is a multi-module maven project, that uses an inmemory H2 database to store the data. 
 The database schema has 2 tables with a 1-M relationship between them.
 The Users table is also used by the Spring security to authenticate using basic auth and jdbc into the application.
-The initial user is test with the password test, although is hashed inside the databse using bcrypt encoder.
+The initial user has the username: test with the password test, although the password is hashed inside the databse using bcrypt encoder.
 The main modules of the application are:
 
 - application: Used for aggregating multiple bussiness services from domain. It has only the domain module as its dependency.
